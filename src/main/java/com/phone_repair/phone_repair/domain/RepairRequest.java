@@ -7,6 +7,8 @@ import lombok.Data;
 @Entity
 @Table(name = "repair_requests")
 public class RepairRequest {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

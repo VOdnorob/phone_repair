@@ -17,7 +17,7 @@ import java.util.List;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     private String name;
@@ -25,10 +25,21 @@ public class Client {
 
     @Column(nullable = false, unique = true)
     private String email;
+    private String password;
+
     private String numberPhone;
 
     @JsonIgnore
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<RepairRequest> repairRequests = new ArrayList<>();
+
+    public Client(String name, String surname, String email, String password, String numberPhone) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.numberPhone = numberPhone;
+        this.repairRequests = new ArrayList<>();
+    }
 
 }

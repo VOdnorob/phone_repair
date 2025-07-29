@@ -3,25 +3,24 @@ package com.phone_repair.phone_repair.Controller;
 import com.phone_repair.phone_repair.DTO.ClientDTO;
 import com.phone_repair.phone_repair.DTO.ClientDTORegistr;
 import com.phone_repair.phone_repair.Service.ClientService;
+import com.phone_repair.phone_repair.Service.EmailSender;
 import com.phone_repair.phone_repair.domain.Client;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@RestController("/user")
+@RestController
+@RequestMapping("/user")
 public class ClientController {
 
 
     private final ClientService clientService;
+    private final EmailSender emailSender;
 
     @GetMapping("/")
     public List<ClientDTO> getAllClients() {
@@ -39,13 +38,11 @@ public class ClientController {
                 client.getNumberPhone());
     }
 
-    @PostMapping("/")
+    @PostMapping("/registration")
     public HttpStatus createClient(@RequestBody @Valid ClientDTORegistr client) {
-        clientService.createClient(new Client(0, client.getName(),
-                client.getSurname(),
-                client.getEmail(),
-                client.getNumberPhone(),
-                new ArrayList<>()));
+        clientService.createClient(client);
+        emailSender.sendEmail(client.getEmail(), "Registration", "Вітаю вас з реєстрацією, на своєму сайті");
+
         return HttpStatus.CREATED;
     }
 
