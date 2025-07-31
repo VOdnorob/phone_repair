@@ -42,7 +42,6 @@ public class ClientController {
     public HttpStatus createClient(@RequestBody @Valid ClientDTORegistr client) {
         clientService.createClient(client);
         emailSender.sendEmail(client.getEmail(), "Registration", "Вітаю вас з реєстрацією, на своєму сайті");
-
         return HttpStatus.CREATED;
     }
 
