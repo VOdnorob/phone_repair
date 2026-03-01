@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 export default function Client() {
     const [responseStatus, setResponseStatus] = useState(null);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [user, setUser] = useState(
         {
             name: "",
@@ -25,10 +26,10 @@ export default function Client() {
                 }
             );
             setResponseStatus(response.status === 201 ? "User added successfully" : "Failed to add user");
-        }catch (error) {
-        console.log(error);}
+        } catch (error) {
+            console.log(error);
+        }
     }
-
 
 
     return (
@@ -48,8 +49,13 @@ export default function Client() {
                               onChange={e => setUser({...user, email: e.target.value})}/>
                 <hr/>
                 Password: <input name="password"
+                                 type={isPasswordVisible ? "text" : "password"}
                                  value={user.password}
                                  onChange={e => setUser({...user, password: e.target.value})}/>
+
+
+                <button onClick={() => setIsPasswordVisible(!isPasswordVisible)}>Show password</button>
+
                 <hr/>
                 Phone Number: <input name="phoneNumber"
                                      value={user.numberPhone}
