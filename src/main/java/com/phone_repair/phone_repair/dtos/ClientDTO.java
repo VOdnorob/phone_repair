@@ -1,4 +1,4 @@
-package com.phone_repair.phone_repair.DTO;
+package com.phone_repair.phone_repair.dtos;
 
 
 import lombok.AllArgsConstructor;

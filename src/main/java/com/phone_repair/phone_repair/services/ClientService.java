@@ -1,8 +1,8 @@
-package com.phone_repair.phone_repair.Service;
+package com.phone_repair.phone_repair.services;
 
-import com.phone_repair.phone_repair.DTO.ClientDTORegistr;
+import com.phone_repair.phone_repair.dtos.ClientDTORegistr;
 import com.phone_repair.phone_repair.domain.Client;
-import com.phone_repair.phone_repair.repositorys.ClientRepository;
+import com.phone_repair.phone_repair.repositories.ClientRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +19,7 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailSender emailSender;
 
     public List<Client> findAll() {
         return clientRepository.findAll();
@@ -32,7 +33,7 @@ public class ClientService {
         clientRepository.findByEmail(client.getEmail())
                 .ifPresent(c -> {
                     throw new ResponseStatusException(
-                            HttpStatus.BAD_REQUEST,
+                            HttpStatus.CONFLICT,
                             "Worker with " + client.getEmail() + " already registered"
                     );
                 });
@@ -42,6 +43,7 @@ public class ClientService {
                 encodedPassword,
                 client.getNumberPhone()
         ));
+        emailSender.sendEmail(client.getEmail(), "Registration", "Вітаю вас з реєстрацією, на своєму сайті");
 
     }
 }

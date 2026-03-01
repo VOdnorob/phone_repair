@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Table
 public class FixingPhone {
     @Id
-    private Long id;
+    private long id;
 
     private String modelPhone;
 

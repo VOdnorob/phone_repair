@@ -1,11 +1,9 @@
-package com.phone_repair.phone_repair.DTO;
+package com.phone_repair.phone_repair.dtos;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +20,9 @@ public class ClientDTORegistr {
     @Email
     @NotBlank
     private String email;
+
+    @NotBlank
+    @Size(min = 6, max = 100)
     private String password;
     private String numberPhone;
 

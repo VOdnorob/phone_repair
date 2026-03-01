@@ -1,15 +1,16 @@
 package com.phone_repair.phone_repair.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,7 @@ import java.util.List;
 public class Client {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -29,7 +30,6 @@ public class Client {
 
     private String numberPhone;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<RepairRequest> repairRequests = new ArrayList<>();
 

@@ -1,9 +1,9 @@
-package com.phone_repair.phone_repair.Controller;
+package com.phone_repair.phone_repair.controllers;
 
-import com.phone_repair.phone_repair.DTO.ClientDTO;
-import com.phone_repair.phone_repair.DTO.ClientDTORegistr;
-import com.phone_repair.phone_repair.Service.ClientService;
-import com.phone_repair.phone_repair.Service.EmailSender;
+import com.phone_repair.phone_repair.dtos.ClientDTO;
+import com.phone_repair.phone_repair.dtos.ClientDTORegistr;
+import com.phone_repair.phone_repair.services.ClientService;
+import com.phone_repair.phone_repair.services.EmailSender;
 import com.phone_repair.phone_repair.domain.Client;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/user")
@@ -38,11 +39,12 @@ public class ClientController {
                 client.getNumberPhone());
     }
 
+
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/registration")
-    public HttpStatus createClient(@RequestBody @Valid ClientDTORegistr client) {
+    public void createClient(@RequestBody @Valid ClientDTORegistr client) {
         clientService.createClient(client);
-        emailSender.sendEmail(client.getEmail(), "Registration", "Вітаю вас з реєстрацією, на своєму сайті");
-        return HttpStatus.CREATED;
+        
     }
 
 

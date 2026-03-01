@@ -1,8 +1,8 @@
-package com.phone_repair.phone_repair.Service;
+package com.phone_repair.phone_repair.services;
 
 
 import com.phone_repair.phone_repair.domain.RepairRequest;
-import com.phone_repair.phone_repair.repositorys.RepairRequestRepository;
+import com.phone_repair.phone_repair.repositories.RepairRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

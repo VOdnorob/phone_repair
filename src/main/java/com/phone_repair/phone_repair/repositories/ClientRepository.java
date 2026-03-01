@@ -1,4 +1,4 @@
-package com.phone_repair.phone_repair.repositorys;
+package com.phone_repair.phone_repair.repositories;
 
 import com.phone_repair.phone_repair.domain.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
